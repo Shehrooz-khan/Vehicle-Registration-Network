@@ -1,0 +1,33 @@
+
+namespace org.vehicle.network
+
+asset TradingVehicle identified by vehicleId {
+
+  o String vehicleId
+  o String vehicleName
+  o String vehicleDescription
+  o VehicleType vehicleType
+  default="fourwheel"
+  o Boolean forTrade
+  --> Distributor distributor
+}
+enum VehicleType {
+  o fourwheel
+  o twowheel
+  o threewheel
+}
+
+participant Distributor identified by licenseNo {
+  o String licenseNo
+  o String DistributorName
+}
+
+transaction VehicleRegistration {
+  --> TradingVehicle vehicle
+  --> Distributor newdistributor
+
+}
+
+event TradeNotification {
+  --> TradingVehicle vehicle
+}
